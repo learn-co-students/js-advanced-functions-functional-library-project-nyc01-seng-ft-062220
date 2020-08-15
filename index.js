@@ -33,6 +33,16 @@ const fi = (function() {
       return newCollection
     },
 
+    reduce: function(collection, callback, acc) {
+      const newCollection = (collection instanceof Array) ? collection.slice() : Object.values(collection)
+
+      for (let idx = 0; idx < newCollection.length; idx++) {
+          acc = acc + callback(newCollection[idx])
+      }
+
+      return acc
+    },
+
     find: function(collection,predicate) {
       const newCollection = (collection instanceof Array) ? collection.slice() : Object.values(collection)
 
@@ -46,13 +56,73 @@ const fi = (function() {
 
     },
 
-    reduce: function() {
+    filter: function(collection, predicate) {
+      const newCollection = (collection instanceof Array) ? collection.slice() : Object.values(collection)
+
+      let filterCollection = []
+
+      for (let idx = 0; idx < newCollection.length; idx++) {
+        if (predicate(newCollection[idx]) === true) {
+          filterCollection.push(newCollection[idx])
+        }
+      }
+
+      return filterCollection
+
+    },
+
+    size: function(collection) {
+      Object.keys(collection).length
+    },
+
+    first: function(collection,value = 0) {
+      const newCollection = []
+
+      for (let i; i <= value; i++) {
+        newCollection.push(collection[i])
+      }
+
+      return newCollection
+    },
+
+    last: function(collection, value) {
+      const newValue = (value.typeOf === integer) ? value : collection.length - 1
+      const newCollection = []
+ 
+      for (let i = newValue; i < collection.length; i++) {
+        newCollection.push(collection[i])
+      }
+
+      return newCollection
+    },
+
+    compact: function() {
+
+    },
+
+    sortBy: function() {
+
+    },
+
+    flatten: function() {
+
+    },
+
+    uniq: function() {
+
+    },
+
+    keys: function() {
+
+    },
+
+    values: function() {
 
     },
 
     functions: function() {
 
-    },
+    }
 
 
   }
